@@ -1,8 +1,10 @@
+import React, { useState } from "react"
 import Image from "next/image"
 import { SearchIcon, GlobeAltIcon, MenuIcon, UserIcon, UserCircleIcon } from '@heroicons/react/solid'
 
 
 function Header() {
+    const [toogleUserBtn, settoogleUserBtn] = useState(false)
     return (
         <header className="sticky top-0 z-50 grid grid-cols-3 bg-white  shadow-md p-5 md:px-10">
             {/* logo */}
@@ -20,12 +22,26 @@ function Header() {
             <div className="flex items-center space-x-4 justify-end text-gray-800">
                 <p className="hidden md:inline cursor-pointer">Become a host</p>
                 <GlobeAltIcon className="h-6 cursor-pointer text-gray-600 hover:shadow-xl" />
-                <div className="flex items-center space-x-2 border-2 p-2 rounded-full cursor-pointer hover:shadow-xl ">
+                <div className="flex items-center space-x-2 border-2 p-2 rounded-full cursor-pointer hover:shadow-xl " id="menu-button" aria-expanded="true" aria-haspopup="true" onClick={() => { settoogleUserBtn(!toogleUserBtn); return false }}>
                     <MenuIcon className="h-6 text-gray-600 " />
                     <UserCircleIcon className="h-6 text-gray-600 " />
                 </div>
+                {toogleUserBtn == true && (<div className="origin-top-right absolute right-8 w-56 rounded-md shadow-xl mr-5 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none top-20 mt-3 " role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div className="py-1" role="none">
+                        <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
+                        <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
+                        <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+                        <form method="POST" action="#" role="none">
+                            <button type="submit" className="text-gray-700 block w-full text-left px-4 py-2 text-sm  hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-3">
+                                Sign out
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                )}
+
             </div>
-        </header>
+        </header >
     )
 }
 
