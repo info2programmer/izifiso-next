@@ -5,7 +5,7 @@ import styled from "styled-components";
 const ThemeToggle = ({ text, icon, className }) => {
   const [isDark, setIsDark] = useState(false);
   useEffect(() => {
-    setIsDark(document.body.classList.contains("dark"));
+    setIsDark(document.body.classList.contains("light"));
   }, []);
   useEffect(() => {
     if (isDark) {
